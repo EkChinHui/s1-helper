@@ -54,24 +54,62 @@ const TOWN_COORDS = {
   'Yishun': { lat: 1.4304, lng: 103.8354 },
   'Clementi': { lat: 1.3162, lng: 103.7649 },
   'Sembawang': { lat: 1.4491, lng: 103.8185 },
+  'Tengah': { lat: 1.3644, lng: 103.7200 },
   'Central': { lat: 1.2897, lng: 103.8500 },
+};
+
+// Get eligible posting groups based on AL score (MOE official mappings)
+const getEligibleGroups = (score) => {
+  if (score <= 20) return ['PG3', 'IP'];  // G3 + IP eligible
+  if (score <= 22) return ['PG2', 'PG3']; // G2 or G3
+  if (score <= 24) return ['PG2'];        // G2 only
+  if (score === 25) return ['PG1', 'PG2']; // G1 or G2
+  return ['PG1'];  // 26-30: G1 only
+};
+
+// Display names for posting groups
+const GROUP_DISPLAY_NAMES = {
+  'IP': 'IP',
+  'PG1': 'PG1',
+  'PG2': 'PG2',
+  'PG3': 'PG3'
 };
 
 function App() {
   const [schools, setSchools] = useState([]);
   const [filteredSchools, setFilteredSchools] = useState([]);
-  const [selectedStream, setSelectedStream] = useState('IP');
-  const [myScore, setMyScore] = useState(4);
-  const [maxCutoff, setMaxCutoff] = useState(22);
+  const [myScore, setMyScore] = useState(10);
+  const [maxCutoff, setMaxCutoff] = useState(30);
   const [selectedTown, setSelectedTown] = useState('');
   const [postalCode, setPostalCode] = useState('');
   const [userLocation, setUserLocation] = useState(null); // {lat, lng}
   const [locationError, setLocationError] = useState('');
   const [maxDistance, setMaxDistance] = useState(50); // km
+  const [useHistoricalMax, setUseHistoricalMax] = useState(false);
+  const [sortBy, setSortBy] = useState('name'); // 'name' or 'distance'
+
+  // Helper function to extract numeric score from score string
+  const extractNumericScore = (score, stream) => {
+    if (!score || score === '-' || score === '--') return null;
+    const digitsOnly = score.replace(/[^\d]/g, '');
+    if (!digitsOnly) return null;
+
+    if (stream === 'IP') {
+      return parseInt(digitsOnly);
+    } else {
+      if (digitsOnly.length === 4) {
+        return parseInt(digitsOnly.substring(0, 2));
+      } else if (digitsOnly.length === 3) {
+        return parseInt(digitsOnly.substring(0, 1));
+      } else {
+        return parseInt(digitsOnly);
+      }
+    }
+  };
 
   useEffect(() => {
     // Load and parse CSV
-    fetch('/schools.csv')
+    fetch(import.meta.env.BASE_URL + 'schools.csv')
       .then(response => response.text())
       .then(text => {
         const lines = text.split('\n');
@@ -124,41 +162,43 @@ function App() {
     }
   };
 
+  // Get eligible groups based on current score
+  const eligibleGroups = getEligibleGroups(myScore);
+
   useEffect(() => {
     // Apply filters
     let filtered = schools;
+    const groups = getEligibleGroups(myScore);
 
-    // Filter by AL score using selected stream
+    // Filter by AL score - show schools user can get into for any eligible group
     filtered = filtered.filter(school => {
-      const scoreField = `2025_${selectedStream}`;
-      const score = school[scoreField];
+      // Check each eligible group
+      for (const group of groups) {
+        let numericScore;
 
-      // Exclude schools that don't have cut-off points for this stream
-      if (!score || score === '-' || score === '--') return false;
+        if (useHistoricalMax) {
+          // Get scores from all 3 years and use the maximum
+          const years = ['2025', '2024', '2023'];
+          const scores = years
+            .map(year => extractNumericScore(school[`${year}_${group}`], group))
+            .filter(s => s !== null && !isNaN(s));
 
-      // Extract numeric value from score
-      let numericScore;
-      const digitsOnly = score.replace(/[^\d]/g, '');
-
-      if (selectedStream === 'IP') {
-        // IP scores are simple: "7M-" -> 7, "6-" -> 6
-        numericScore = parseInt(digitsOnly);
-      } else {
-        // PG scores can be ranges like "2125" (21-25) or "922" (9-22)
-        // Extract the minimum score (first 1-2 digits)
-        if (digitsOnly.length === 4) {
-          // e.g., "2125" -> 21, "2628" -> 26
-          numericScore = parseInt(digitsOnly.substring(0, 2));
-        } else if (digitsOnly.length === 3) {
-          // e.g., "922" -> 9
-          numericScore = parseInt(digitsOnly.substring(0, 1));
+          if (scores.length > 0) {
+            numericScore = Math.max(...scores);
+          }
         } else {
-          // Single or double digit
-          numericScore = parseInt(digitsOnly);
+          // Use 2025 only
+          numericScore = extractNumericScore(school[`2025_${group}`], group);
+        }
+
+        // If school has a valid COP for this group and user qualifies
+        if (numericScore !== null && !isNaN(numericScore)) {
+          if (myScore <= numericScore && numericScore <= maxCutoff) {
+            return true;
+          }
         }
       }
-
-      return !isNaN(numericScore) && numericScore >= myScore && numericScore <= maxCutoff;
+      return false;
     });
 
     // Filter by location proximity
@@ -185,14 +225,39 @@ function App() {
       });
     }
 
+    // Sort results
+    if (sortBy === 'distance' && effectiveLocation) {
+      filtered.sort((a, b) => {
+        const distA = getDistance(
+          { latitude: effectiveLocation.lat, longitude: effectiveLocation.lng },
+          { latitude: parseFloat(a.Latitude), longitude: parseFloat(a.Longitude) }
+        );
+        const distB = getDistance(
+          { latitude: effectiveLocation.lat, longitude: effectiveLocation.lng },
+          { latitude: parseFloat(b.Latitude), longitude: parseFloat(b.Longitude) }
+        );
+        return distA - distB;
+      });
+    } else {
+      filtered.sort((a, b) => a['School Name'].localeCompare(b['School Name']));
+    }
+
     setFilteredSchools(filtered);
-  }, [schools, selectedStream, myScore, maxCutoff, selectedTown, userLocation, maxDistance]);
+  }, [schools, myScore, maxCutoff, selectedTown, userLocation, maxDistance, useHistoricalMax, sortBy]);
 
   const getScoreDisplay = (school) => {
-    const currentYear = `2025_${selectedStream}`;
-    const prevYear = `2024_${selectedStream}`;
-    const prevYear2 = `2023_${selectedStream}`;
-    return school[currentYear] || school[prevYear] || school[prevYear2] || 'N/A';
+    // Show COP for all eligible groups
+    const groups = getEligibleGroups(myScore);
+    const scores = [];
+
+    for (const group of groups) {
+      const score = school[`2025_${group}`];
+      if (score && score !== '-' && score !== '--') {
+        scores.push(`${GROUP_DISPLAY_NAMES[group]}: ${score}`);
+      }
+    }
+
+    return scores.length > 0 ? scores.join(', ') : 'N/A';
   };
 
   const effectiveLocation = userLocation || (selectedTown && TOWN_COORDS[selectedTown]);
@@ -207,45 +272,46 @@ function App() {
       <div className="filters">
         <div className="filter-group">
           <label>
-            Program Stream:
-            <select
-              value={selectedStream}
-              onChange={(e) => setSelectedStream(e.target.value)}
-            >
-              <option value="IP">Integrated Programme (IP)</option>
-              <option value="PG1">Phase 1 (PG1)</option>
-              <option value="PG2">Phase 2 (PG2)</option>
-              <option value="PG3">Phase 3 (PG3)</option>
-            </select>
-          </label>
-        </div>
-
-        <div className="filter-group">
-          <label>
-            Your AL Score (2025 {selectedStream}): {myScore}
+            Your AL Score: {myScore}
             <input
               type="range"
               min="4"
-              max="22"
+              max="30"
               value={myScore}
               onChange={(e) => setMyScore(parseInt(e.target.value))}
             />
           </label>
-          <p className="filter-hint">Show schools you can get into (cut-off ≥ {myScore})</p>
+          <p className="filter-hint">
+            Eligible for: {eligibleGroups.map(g => GROUP_DISPLAY_NAMES[g]).join(', ')}
+          </p>
         </div>
 
         <div className="filter-group">
           <label>
-            Maximum School Cut-off (2025 {selectedStream}): {maxCutoff}
+            Maximum School Cut-off: {maxCutoff}
             <input
               type="range"
               min="4"
-              max="22"
+              max="30"
               value={maxCutoff}
               onChange={(e) => setMaxCutoff(parseInt(e.target.value))}
             />
           </label>
           <p className="filter-hint">Filter out schools that are too easy (cut-off ≤ {maxCutoff})</p>
+        </div>
+
+        <div className="filter-group">
+          <label className="checkbox-label">
+            <input
+              type="checkbox"
+              checked={useHistoricalMax}
+              onChange={(e) => setUseHistoricalMax(e.target.checked)}
+            />
+            Use historical maximum cut-off
+          </label>
+          <p className="filter-hint">
+            Include schools if their cut-off was high enough in any of the past 3 years (2023-2025)
+          </p>
         </div>
 
         <div className="filter-group">
@@ -298,18 +364,33 @@ function App() {
         </div>
 
         {effectiveLocation && (
-          <div className="filter-group">
-            <label>
-              Maximum Distance: {maxDistance} km
-              <input
-                type="range"
-                min="1"
-                max="50"
-                value={maxDistance}
-                onChange={(e) => setMaxDistance(parseInt(e.target.value))}
-              />
-            </label>
-          </div>
+          <>
+            <div className="filter-group">
+              <label>
+                Maximum Distance: {maxDistance} km
+                <input
+                  type="range"
+                  min="1"
+                  max="50"
+                  value={maxDistance}
+                  onChange={(e) => setMaxDistance(parseInt(e.target.value))}
+                />
+              </label>
+            </div>
+
+            <div className="filter-group">
+              <label>
+                Sort by:
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                >
+                  <option value="name">Name (A-Z)</option>
+                  <option value="distance">Distance (nearest first)</option>
+                </select>
+              </label>
+            </div>
+          </>
         )}
       </div>
 
@@ -323,7 +404,6 @@ function App() {
               <div className="school-info">
                 <p><strong>Town:</strong> {school.Town}</p>
                 <p><strong>Address:</strong> {school.Address}</p>
-                <p><strong>2025 AL Score ({selectedStream}):</strong> {getScoreDisplay(school)}</p>
                 {effectiveLocation && school.Latitude && school.Longitude && (
                   <p><strong>Distance:</strong> {
                     (getDistance(
@@ -333,14 +413,29 @@ function App() {
                   } km</p>
                 )}
               </div>
-              <a
-                href={school['Detail URL']}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="details-link"
-              >
-                View Details →
-              </a>
+              <div className="cop-history">
+                <h4>Cut-Off Points (COP)</h4>
+                <table className="cop-table">
+                  <thead>
+                    <tr>
+                      <th>Year</th>
+                      {eligibleGroups.map(group => (
+                        <th key={group}>{GROUP_DISPLAY_NAMES[group]}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {['2025', '2024', '2023'].map(year => (
+                      <tr key={year}>
+                        <td>{year}</td>
+                        {eligibleGroups.map(group => (
+                          <td key={group}>{school[`${year}_${group}`] || '-'}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           ))}
         </div>
@@ -415,16 +510,10 @@ function App() {
                         <h4>{school['School Name']}</h4>
                         <p><strong>Town:</strong> {school.Town}</p>
                         <p><strong>Address:</strong> {school.Address}</p>
-                        <p><strong>AL Score ({selectedStream}):</strong> {getScoreDisplay(school)}</p>
                         <p><strong>Distance:</strong> {distance} km</p>
-                        <a
-                          href={school['Detail URL']}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="popup-link"
-                        >
-                          View Details →
-                        </a>
+                        <div className="popup-cop">
+                          <strong>2025 COP:</strong> {getScoreDisplay(school)}
+                        </div>
                       </div>
                     </Popup>
                   </Marker>

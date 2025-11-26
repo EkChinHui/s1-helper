@@ -80,6 +80,11 @@ class School:
         if not value or value.strip() == "-":
             return None
         cleaned = value.strip()
+        # Handle range values like "12 - 16" - extract upper bound (COP)
+        if " - " in cleaned:
+            parts = cleaned.split(" - ")
+            if len(parts) == 2:
+                return parts[1].strip()  # Return upper bound
         # Handle multiple values in one cell (e.g., "6M 8M" for affiliated)
         # Take the first value for main school
         parts = cleaned.split()

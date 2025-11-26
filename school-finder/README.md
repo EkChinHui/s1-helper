@@ -1,54 +1,61 @@
-# 🏫 Singapore Secondary School Finder
+# Singapore Secondary School Finder
 
 An interactive web application to help students and parents find suitable Singapore secondary schools based on Achievement Level (AL) scores and location proximity.
 
 [![Deploy to GitHub Pages](https://github.com/EkChinHui/s1-helper/workflows/Deploy%20to%20GitHub%20Pages/badge.svg)](https://github.com/EkChinHui/s1-helper/actions)
 
-## 🌟 Features
+## Features
 
-### Smart Filtering
-- **AL Score Filtering**: Find schools you can get into based on your 2025 AL score
-- **Multiple Streams**: Filter by Integrated Programme (IP), Phase 1 (PG1), Phase 2 (PG2), or Phase 3 (PG3)
+### Smart AL Score Filtering
+
+- **Automatic Posting Group Detection**: Enter your AL score and the app automatically determines your eligible posting groups based on MOE's official mappings:
+
+  | AL Score | Eligible Posting Groups |
+  |----------|------------------------|
+  | 4-20     | PG3, IP |
+  | 21-22    | PG2, PG3 |
+  | 23-24    | PG2 |
+  | 25       | PG1, PG2 |
+  | 26-30    | PG1 |
+
+- **Dynamic COP Display**: School cards only show Cut-Off Points for your eligible posting groups
 - **Adjustable Range**: Set both minimum and maximum cut-off points to find schools that match your preferences
-- **Historical Data**: Includes cut-off data from 2023, 2024, and 2025
+- **Historical Data Toggle**: Option to include schools based on historical maximum COP (2023-2025)
 
 ### Location-Based Search
-- **Town Selection**: Choose from 28+ Singapore towns/planning areas
-- **Postal Code Lookup**: Enter your postal code for precise location matching
+
+- **Town Selection**: Choose from 29 Singapore towns/planning areas including:
+  - Ang Mo Kio, Bedok, Bishan, Bukit Batok, Bukit Merah, Bukit Panjang, Bukit Timah
+  - Central, Choa Chu Kang, Clementi, Geylang, Hougang, Jurong East, Jurong West
+  - Kallang, Marine Parade, Novena, Pasir Ris, Punggol, Queenstown, Sembawang
+  - Seng Kang, Serangoon, Tampines, **Tengah**, Toa Payoh, Woodlands, Yishun
+- **Postal Code Lookup**: Enter your 6-digit postal code for precise location matching
 - **Distance Filtering**: Find schools within a customizable radius (1-50 km)
+- **Sort by Distance**: Sort results by nearest schools first when location is set
 - **Automatic Geocoding**: Uses OneMap API for accurate Singapore addresses
 
 ### Interactive Map
+
 - **Visual School Locations**: See all matching schools on an interactive map
 - **Your Location Marker**: Clearly marked user location with custom icon
 - **Distance Radius**: Visual circle showing your search radius
 - **School Tooltips**: Hover over markers to see school names
-- **Detailed Popups**: Click markers for school details, AL scores, and distances
+- **Detailed Popups**: Click markers for school details and COP information
 - **OneMap Integration**: Uses official Singapore government mapping service
 
-### School Information
+### School Information Cards
+
+Each school card displays:
 - School name and full address
 - Town/planning area
-- Current and historical AL cut-off points
-- Distance from your location
-- Direct links to detailed school information
+- Distance from your location (when location is set)
+- **COP History Table**: 3-year historical cut-off points (2023-2025) for your eligible posting groups only
 
-## 🚀 Live Demo
+## Live Demo
 
 Visit the live application: **[https://ekchinhhui.github.io/s1-helper/](https://ekchinhhui.github.io/s1-helper/)**
 
-## 📸 Screenshots
-
-### Filter Interface
-Filter schools by AL score and location with intuitive sliders and dropdowns.
-
-### Map View
-See all matching schools on an interactive map with distance indicators.
-
-### School Cards
-Browse detailed school information in a clean, card-based layout.
-
-## 🛠️ Technology Stack
+## Technology Stack
 
 - **Frontend Framework**: React 19
 - **Build Tool**: Vite 7
@@ -63,13 +70,13 @@ Browse detailed school information in a clean, card-based layout.
 - **Styling**: CSS3 with custom styles
 - **Hosting**: GitHub Pages
 
-## 📋 Prerequisites
+## Prerequisites
 
-- Node.js 18+ and npm
+- Node.js 20.19+ or 22.12+ and npm
 - Modern web browser with JavaScript enabled
 - Internet connection (for map tiles and geocoding API)
 
-## 💻 Local Development
+## Local Development
 
 ### 1. Clone the Repository
 
@@ -106,7 +113,7 @@ The optimized production build will be in the `dist/` folder.
 npm run preview
 ```
 
-## 📊 Data Format
+## Data Format
 
 The application expects a CSV file at `public/schools.csv` with the following columns:
 
@@ -121,8 +128,8 @@ School Name,Town,Address,2025_IP,2025_PG3,2025_PG2,2025_PG1,2024_IP,2024_PG3,202
 | `School Name` | Official school name | Raffles Institution |
 | `Town` | Planning area/town | Bishan |
 | `Address` | Full postal address | 1 Raffles Institution Lane Singapore 575954 |
-| `2025_IP` | 2025 IP cut-off | 4- |
-| `2025_PG1/2/3` | 2025 Phase cut-offs | 9-13 |
+| `2025_IP` | 2025 IP cut-off | 6 |
+| `2025_PG1/2/3` | 2025 Posting Group cut-offs | 14 |
 | `2024_*` / `2023_*` | Historical cut-offs | Same format |
 | `Detail URL` | School info link | https://sgschooling.com/... |
 | `Latitude` | School latitude | 1.3404 |
@@ -130,11 +137,11 @@ School Name,Town,Address,2025_IP,2025_PG3,2025_PG2,2025_PG1,2024_IP,2024_PG3,202
 
 ### Score Format Examples
 
-- **IP Scores**: `4-`, `6-`, `7M-` (single digit, optionally with M for Mother Tongue)
-- **PG Scores**: `9-13`, `2125` (ranges)
-- **No Programme**: `--` or `-` (school doesn't offer this stream)
+- **IP Scores**: `6`, `7M` (single/double digit, optionally with M for Mother Tongue affiliation)
+- **PG Scores**: `14`, `22` (COP values - the upper bound of the AL range)
+- **No Programme**: `-` or `--` (school doesn't offer this stream)
 
-## 🗺️ Obtaining School Data
+## Obtaining School Data
 
 ### Option 1: Use the Scraper (Recommended for Fresh Data)
 
@@ -152,27 +159,22 @@ This will:
 - Extract cut-off points for all programmes (IP, PG1, PG2, PG3)
 - Include 2023, 2024, and 2025 data
 - Get school addresses and coordinates
-- Output to `data/schools.csv`
+- Output to `school-finder/public/schools.csv`
 
-Copy the generated file:
-```bash
-cp data/schools.csv school-finder/public/schools.csv
-```
-
-**Note**: The scraper may fail if the source website implements bot protection. In this case, you'll need to manually export the data or use an existing dataset.
+**Note**: The scraper extracts the upper bound (COP) from AL range data (e.g., "12 - 16" becomes "16").
 
 ### Option 2: Manual Data Entry
 
 You can create your own CSV file based on data from:
 - Ministry of Education (MOE) website
 - School websites
-- Education portals like sgschooling.com
+- Education portals
 
 ### Option 3: Use Sample Data
 
 The repository includes sample data for testing purposes in `public/schools.csv`.
 
-## 🚀 Deployment to GitHub Pages
+## Deployment to GitHub Pages
 
 ### Automatic Deployment (Recommended)
 
@@ -207,7 +209,7 @@ cd ..
 npx gh-pages -d dist
 ```
 
-## ⚙️ Configuration
+## Configuration
 
 ### Changing Repository Name
 
@@ -226,13 +228,13 @@ Edit `src/App.jsx` to customize:
 
 ```javascript
 // Default map zoom level
-zoom={11}  // Line 356
+zoom={11}
 
-// Default distance filter
-const [maxDistance, setMaxDistance] = useState(50); // Line 70
+// Default distance filter (km)
+const [maxDistance, setMaxDistance] = useState(50);
 
 // Map tile provider (currently OneMap)
-url="https://www.onemap.gov.sg/maps/tiles/Default/{z}/{x}/{y}.png"  // Line 360
+url="https://www.onemap.gov.sg/maps/tiles/Default/{z}/{x}/{y}.png"
 ```
 
 ### Adding More Towns
@@ -246,31 +248,31 @@ const TOWN_COORDS = {
 };
 ```
 
-## 📱 Browser Compatibility
+## Browser Compatibility
 
-- ✅ Chrome 90+
-- ✅ Firefox 88+
-- ✅ Safari 14+
-- ✅ Edge 90+
-- ⚠️ Internet Explorer: Not supported
+- Chrome 90+
+- Firefox 88+
+- Safari 14+
+- Edge 90+
+- Internet Explorer: Not supported
 
-## 🔒 Privacy & Data
+## Privacy & Data
 
 - **No User Data Collection**: This app runs entirely in your browser
 - **No Cookies**: No tracking or analytics
 - **External APIs**:
-  - OneMap API for geocoding (postal code → coordinates)
+  - OneMap API for geocoding (postal code to coordinates)
   - OneMap tiles for map display
-- **Data Source**: School data is scraped from public websites (sgschooling.com)
+- **Data Source**: School data is scraped from public websites
 
-## 🐛 Known Issues & Limitations
+## Known Issues & Limitations
 
 1. **Geocoding Limits**: OneMap API has rate limits. If you make too many postal code lookups quickly, you may get errors.
 2. **Browser Caching**: Map tiles are cached by your browser. Use Ctrl+Shift+R to force refresh if maps don't load.
 3. **Mobile Performance**: Large datasets may be slower on older mobile devices.
-4. **Scraper Reliability**: The web scraper may break if the source website changes structure or blocks automated access.
+4. **Scraper Reliability**: The web scraper may break if the source website changes structure.
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Here's how you can help:
 
@@ -298,46 +300,33 @@ git commit -m "Add: your feature description"
 git push origin feature/your-feature-name
 ```
 
-## 📄 License
+## License
 
 This project is for educational purposes. School data is publicly available information.
 
 - Code: MIT License
-- Data: Sourced from public websites (sgschooling.com, MOE)
-- Maps: © OneMap (Singapore Land Authority)
+- Data: Sourced from public websites (MOE, education portals)
+- Maps: OneMap (Singapore Land Authority)
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **OneMap**: Singapore Land Authority for mapping services
-- **sgschooling.com**: Source for school cut-off point data
-- **Ministry of Education (MOE)**: Official education data
+- **Ministry of Education (MOE)**: Official education data and posting group definitions
 - **Leaflet**: Open-source mapping library
 - **React + Vite**: Modern web development tools
 
-## 📞 Support
+## Support
 
 - **Issues**: [GitHub Issues](https://github.com/EkChinHui/s1-helper/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/EkChinHui/s1-helper/discussions)
 
-## 🗺️ Roadmap
-
-- [ ] Add school comparison feature
-- [ ] Include CCA (Co-Curricular Activities) information
-- [ ] Add school rankings and ratings
-- [ ] Include MRT/bus accessibility
-- [ ] Mobile app version
-- [ ] Export filtered results to PDF
-- [ ] Add school photos and virtual tours
-- [ ] Integration with MOE School Finder
-
-## 📚 Related Resources
+## Related Resources
 
 - [MOE Secondary School Posting](https://www.moe.gov.sg/secondary/s1-posting)
+- [MOE Full Subject-Based Banding](https://www.moe.gov.sg/microsites/psle-fsbb/full-subject-based-banding/secondary-school-posting.html)
 - [OneMap API Documentation](https://www.onemap.gov.sg/docs/)
 - [Singapore School Information](https://www.moe.gov.sg/schoolfinder)
 
 ---
-
-**Made with ❤️ for Singapore students and parents**
 
 *Last Updated: November 2025*

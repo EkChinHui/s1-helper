@@ -32,7 +32,7 @@ async function geocodeAddress(address) {
 
 async function main() {
   console.log('Reading schools.csv...');
-  const csvContent = fs.readFileSync('../data/schools.csv', 'utf-8');
+  const csvContent = fs.readFileSync('./public/schools.csv', 'utf-8');
 
   // Parse CSV
   const records = parse(csvContent, {
@@ -77,7 +77,7 @@ async function main() {
     columns: Object.keys(records[0])
   });
 
-  fs.writeFileSync('../data/schools.csv', output, 'utf-8');
+  fs.writeFileSync('./public/schools.csv', output, 'utf-8');
   console.log('Done! Updated schools.csv with coordinates.');
 
   // Print summary

@@ -1,21 +1,140 @@
 School Name,Town,Address,2025_IP,2025_PG3,2025_PG2,2025_PG1,2024_IP,2024_PG3,2024_PG2,2024_PG1,2023_IP,2023_PG3,2023_PG2,2023_PG1,Detail URL,Scrape Timestamp,Latitude,Longitude
-Raffles Institution,Bishan,1 Raffles Institution Lane Singapore 575954,4-,--,--,--,4-,--,--,--,4-,--,--,--,https://sgschooling.com/secondary/raffles-institution,2025-11-26,1.3404,103.8481
-Hwa Chong Institution,Bukit Timah,661 Bukit Timah Road Singapore 269734,4-,--,--,--,4-,--,--,--,4-,--,--,--,https://sgschooling.com/secondary/hwa-chong-institution,2025-11-26,1.3265,103.8077
-Nanyang Girls' High School,Bukit Timah,2 Linden Drive Singapore 288683,4-,--,--,--,4-,--,--,--,4-,--,--,--,https://sgschooling.com/secondary/nanyang-girls-high,2025-11-26,1.3258,103.8064
-Anglo-Chinese School (Independent),Newton,121 Dover Road Singapore 139644,6-,--,--,--,6-,--,--,--,6-,--,--,--,https://sgschooling.com/secondary/acs-independent,2025-11-26,1.3092,103.8094
-Dunman High School,Tampines,10 Tanjong Rhu Road Singapore 436895,6-,--,--,--,6-,--,--,--,6-,--,--,--,https://sgschooling.com/secondary/dunman-high,2025-11-26,1.3036,103.8735
-School of Science and Technology,Woodlands,1 Technology Drive Singapore 138572,6-,--,--,--,6-,--,--,--,6-,--,--,--,https://sgschooling.com/secondary/sst,2025-11-26,1.4408,103.7847
-National Junior College,Bukit Timah,37 Hillcrest Road Singapore 288913,7-,--,--,--,7-,--,--,--,7-,--,--,--,https://sgschooling.com/secondary/njc,2025-11-26,1.3288,103.8087
-River Valley High School,Bukit Merah,6 Boon Lay Avenue Singapore 649961,7M-,--,--,--,7M-,--,--,--,7M-,--,--,--,https://sgschooling.com/secondary/rvhs,2025-11-26,1.2834,103.8159
-Cedar Girls' Secondary School,Bedok,100 Bedok North Avenue 4 Singapore 469948,--,6,8-12,13-16,--,6,8-12,13-16,--,6,8-12,13-16,https://sgschooling.com/secondary/cedar-girls,2025-11-26,1.3313,103.9367
-Methodist Girls' School (Secondary),Bukit Timah,11 Blackmore Drive Singapore 599986,8-,--,--,--,8-,--,--,--,8-,--,--,--,https://sgschooling.com/secondary/mgs,2025-11-26,1.3294,103.8008
-Victoria School,Central,2 Siglap Link Singapore 528516,--,7,9-13,14-18,--,7,9-13,14-18,--,7,9-13,14-18,https://sgschooling.com/secondary/victoria-school,2025-11-26,1.3163,103.8993
-Anderson Serangoon Junior College,Serangoon,4A Serangoon Avenue 4 Singapore 556089,--,8,10-14,15-19,--,8,10-14,15-19,--,8,10-14,15-19,https://sgschooling.com/secondary/asjc,2025-11-26,1.3554,103.8679
-Chung Cheng High School (Main),Yishun,50 Goodman Road Singapore 439053,--,9,11-15,16-20,--,9,11-15,16-20,--,9,11-15,16-20,https://sgschooling.com/secondary/cchsm,2025-11-26,1.4304,103.8354
-Temasek Junior College,Bedok,22 Bedok South Road Singapore 469278,--,10,12-16,17-21,--,10,12-16,17-21,--,10,12-16,17-21,https://sgschooling.com/secondary/tjc,2025-11-26,1.3175,103.9234
-Jurong Pioneer Junior College,Jurong West,21 Teck Whye Walk Singapore 688590,--,11,13-17,18-22,--,11,13-17,18-22,--,11,13-17,18-22,https://sgschooling.com/secondary/jpjc,2025-11-26,1.3404,103.7090
-St. Joseph's Institution,Novena,38 Malcolm Road Singapore 308274,--,7,9-13,14-18,--,7,9-13,14-18,--,7,9-13,14-18,https://sgschooling.com/secondary/sji,2025-11-26,1.3202,103.8437
-Raffles Girls' School (Secondary),Toa Payoh,20 Anderson Road Singapore 259978,4-,--,--,--,4-,--,--,--,4-,--,--,--,https://sgschooling.com/secondary/rgs,2025-11-26,1.3341,103.8561
-Singapore Chinese Girls' School,Toa Payoh,190 Dunearn Road Singapore 309437,--,6,8-12,13-16,--,6,8-12,13-16,--,6,8-12,13-16,https://sgschooling.com/secondary/scgs,2025-11-26,1.3341,103.8561
-Eunoia Junior College,Bishan,2 Sin Ming Place Singapore 573838,--,8,10-14,15-19,--,8,10-14,15-19,--,8,10-14,15-19,https://sgschooling.com/secondary/ejc,2025-11-26,1.3526,103.8352
-Tampines Meridian Junior College,Tampines,21 Tampines Avenue 9 Singapore 529757,--,12,14-18,19-22,--,12,14-18,19-22,--,12,14-18,19-22,https://sgschooling.com/secondary/tmjc,2025-11-26,1.3537,103.9447
+Raffles Girls’ (Secondary),Toa Payoh,2 Braddell Rise,5,-,-,-,6,-,-,-,6,-,-,-,https://sgschooling.com/secondary/raffles-girls-secondary,2025-11-26T13:45:02.014984,1.34217479932295,103.84313404727
+Hwa Chong Institution (Secondary),Bukit Timah,661 Bukit Timah Road,6M,-,-,-,4D-,-,-,-,4D-,-,-,-,https://sgschooling.com/secondary/hwa-chong-institution-secondary,2025-11-26T13:45:02.015038,1.3263580622144,103.803290365022
+Nanyang Girls’ High,Bukit Timah,2 Linden Drive,6M8M,--,--,--,-,-,-,-,-,-,-,-,https://sgschooling.com/secondary/nanyang-girls-high,2025-11-26T13:45:02.015085,1.33058326666479,103.802420979943
+Raffles Institution (Secondary),Bishan,1 Raffles Institution Lane,6,-,-,-,6,-,-,-,6,-,-,-,https://sgschooling.com/secondary/raffles-institution-secondary,2025-11-26T13:45:02.015117,1.34618775847486,103.845875110532
+Anglo-Chinese (Independent) (Secondary),Queenstown,121 Dover Road,6-,713,--,--,-,-,-,-,-,-,-,-,https://sgschooling.com/secondary/anglo-chinese-independent-secondary,2025-11-26T13:45:02.015157,1.30370409257783,103.780363417671
+Dunman High (Secondary),Kallang,10 Tanjong Rhu Road,7M,-,-,-,4D-,-,-,-,5D-,-,-,-,https://sgschooling.com/secondary/dunman-high-secondary,2025-11-26T13:45:02.015191,1.29996216014962,103.88294155989
+Methodist Girls’ (Secondary),Bukit Timah,11 Blackmore Drive,6-,717,--,--,-,-,-,-,-,-,-,-,https://sgschooling.com/secondary/methodist-girls-secondary,2025-11-26T13:45:02.015232,1.33266213599636,103.783382114018
+National Junior College (Secondary),Bukit Timah,37 Hillcrest Road,7,-,-,-,8,-,-,-,7,-,-,-,https://sgschooling.com/secondary/national-junior-college-secondary,2025-11-26T13:45:02.015264,1.33029291072172,103.804110905425
+Catholic High (Secondary),Bishan,9 Bishan Street 22,7M-,8P12,--,--,-,-,-,-,-,-,-,-,https://sgschooling.com/secondary/catholic-high-secondary,2025-11-26T13:45:02.015307,1.3547230747166,103.844874676599
+CHIJ St. Nicholas Girls’ (Secondary),Ang Mo Kio,501 Ang Mo Kio Street 13,7D-,8M14,--,--,-,-,-,-,-,-,-,-,https://sgschooling.com/secondary/chij-st-nicholas-girls-secondary,2025-11-26T13:45:02.015347,1.37347687878916,103.834253269436
+River Valley High (Secondary),Jurong West,6 Boon Lay Avenue,8M,-,-,-,4M-,-,-,-,4M-,-,-,-,https://sgschooling.com/secondary/river-valley-high-secondary,2025-11-26T13:45:02.015379,1.34459584223718,103.708190688947
+Singapore Chinese Girls’,Novena,190 Dunearn Road,7-,817,--,--,-,-,-,-,-,-,-,-,https://sgschooling.com/secondary/singapore-chinese-girls,2025-11-26T13:45:02.015418,1.3206340835184,103.828164966953
+St. Joseph’s Institution (Secondary),Novena,38 Malcolm Road,7-,812,--,--,-,-,-,-,-,-,-,-,https://sgschooling.com/secondary/st-josephs-institution-secondary,2025-11-26T13:45:02.015459,1.32365313490152,103.828498974985
+Temasek Junior College (Secondary),Tampines,2 Tampines Avenue 9,8,-,-,-,8,-,-,-,9,-,-,-,https://sgschooling.com/secondary/temasek-junior-college-secondary,2025-11-26T13:45:02.015487,1.35728017255861,103.956185936394
+Anglo-Chinese (Barker Road),Novena,60 Barker Road,--,922,2125,2628,-,-,-,-,-,-,-,-,https://sgschooling.com/secondary/anglo-chinese-barker-road,2025-11-26T13:45:02.015524,1.31961649151328,103.835772689988
+Cedar Girls’,Toa Payoh,1 Cedar Avenue,7,9,-,-,8,9,-,-,8,9,-,-,https://sgschooling.com/secondary/cedar-girls,2025-11-26T13:45:02.015552,1.33375800216334,103.873933064886
+CHIJ Secondary (Toa Payoh),Toa Payoh,626 Lorong 1 Toa Payoh,--,920,2225,2828,-,-,-,-,-,-,-,-,https://sgschooling.com/secondary/chij-secondary-toa-payoh,2025-11-26T13:45:02.015590,1.33246079948303,103.843271625083
+Chung Cheng High (Main),Marine Parade,50 Goodman Road,-,9P,-,-,-,7M-,-,-,-,6M-,-,-,https://sgschooling.com/secondary/chung-cheng-high-main,2025-11-26T13:45:02.015624,1.30509154753048,103.891653229373
+Kuo Chuan Presbyterian,Bishan,10 Bishan Street 13,--,920,2325,2828,-,-,-,-,-,-,-,-,https://sgschooling.com/secondary/kuo-chuan-presbyterian,2025-11-26T13:45:02.015664,1.35017129930314,103.854983746416
+St. Andrew’s,Toa Payoh,15 Francis Thomas Drive,--,922,2125,2729,-,-,-,-,-,-,-,-,https://sgschooling.com/secondary/st-andrews,2025-11-26T13:45:02.015700,1.33069360968075,103.866249138562
+Victoria,Bedok,2 Siglap Link,7,9,-,-,8,9,-,-,8,10,-,-,https://sgschooling.com/secondary/victoria,2025-11-26T13:45:02.015728,1.3087130270751,103.927980966639
+Anderson,Ang Mo Kio,10 Ang Mo Kio Street 53,-,10,23,26,-,10,22,28,-,10,22,26,https://sgschooling.com/secondary/anderson,2025-11-26T13:45:02.015756,1.37434001701177,103.851554107068
+Crescent Girls’,Bukit Merah,357 Tanglin Road,-,10,23,-,-,11,25,-,-,12,-,-,https://sgschooling.com/secondary/crescent-girls,2025-11-26T13:45:02.015783,1.29331947077104,103.817544461755
+Fairfield Methodist (Secondary),Queenstown,102 Dover Road,--,1020,2225,2729,-,-,-,-,-,-,-,-,https://sgschooling.com/secondary/fairfield-methodist-secondary,2025-11-26T13:45:02.015821,1.30163374395823,103.784099647149
+Nan Chiau High,Seng Kang,20 Anchorvale Link,-,10,-,-,-,5D-,-,-,-,5D-,-,-,https://sgschooling.com/secondary/nan-chiau-high,2025-11-26T13:45:02.015848,1.38879582498399,103.890004423764
+Nan Hua High,Clementi,41 Clementi Avenue 1,-,10M,-,-,-,6D-,-,-,-,6D-,-,-,https://sgschooling.com/secondary/nan-hua-high,2025-11-26T13:45:02.015877,1.30809529518605,103.768561446725
+Paya Lebar Methodist Girls’ (Secondary),Hougang,296 Lor Ah Soo,--,1020,2425,2828,-,-,-,-,-,-,-,-,https://sgschooling.com/secondary/paya-lebar-methodist-girls-secondary,2025-11-26T13:45:02.015915,1.35096755912522,103.885120050588
+Swiss Cottage,Bukit Batok,3 Bukit Batok Street 34,-,10,22,26,-,11,22,26,-,11,22,26,https://sgschooling.com/secondary/swiss-cottage,2025-11-26T13:45:02.015943,1.36471742697475,103.750396136688
+Anglican High,Bedok,600 Upper Changi Road,-,11M,-,-,-,6M-,-,-,-,6M-,-,-,https://sgschooling.com/secondary/anglican-high,2025-11-26T13:45:02.015972,1.33058126205128,103.941082513081
+Bukit Panjang Govt. High,Choa Chu Kang,7 Choa Chu Kang Ave 4,-,11,22,26,-,11,22,26,-,12,22,26,https://sgschooling.com/secondary/bukit-panjang-govt-high,2025-11-26T13:45:02.016001,1.38224243360043,103.738361221869
+Chung Cheng High (Yishun),Yishun,11 Yishun Street 61,-,11,22,27,-,12,22,28,-,13,22,27,https://sgschooling.com/secondary/chung-cheng-high-yishun,2025-11-26T13:45:02.016029,1.41922603586175,103.837390782849
+Maris Stella High (Secondary),Toa Payoh,25 Mount Vernon Road,--,1116,--,--,-,-,-,-,-,-,-,-,https://sgschooling.com/secondary/maris-stella-high-secondary,2025-11-26T13:45:02.016066,1.34139181236127,103.877740713449
+Ngee Ann,Tampines,1 Tampines Street 32,--,1116,2125,2728,-,-,-,-,-,-,-,-,https://sgschooling.com/secondary/ngee-ann,2025-11-26T13:45:02.016103,1.35447525755806,103.956747262496
+St. Margaret’s (Secondary),Bukit Timah,111 Farrer Road,--,1120,2525,2829,-,-,-,-,-,-,-,-,https://sgschooling.com/secondary/st-margarets-secondary,2025-11-26T13:45:02.016140,1.31977464050584,103.809602215402
+St. Patrick’s,Bedok,490 East Coast Road,--,1119,2225,2728,-,-,-,-,-,-,-,-,https://sgschooling.com/secondary/st-patricks,2025-11-26T13:45:02.016176,1.30788341871801,103.917638193713
+Temasek,Bedok,600 Upper East Coast Road,-,11,22,26,-,12,22,27,-,13,22,26,https://sgschooling.com/secondary/temasek,2025-11-26T13:45:02.016203,1.31591673150616,103.947564112022
+CHIJ St. Theresa’s Convent,Bukit Merah,160 Lower Delta Road,--,1220,2325,3028,-,-,-,-,-,-,-,-,https://sgschooling.com/secondary/chij-st-theresas-convent,2025-11-26T13:45:02.016240,1.27535177510054,103.822440701642
+Commonwealth,Jurong East,698 West Coast Road,-,12,23,27,-,13,23,30,-,15,23,27,https://sgschooling.com/secondary/commonwealth,2025-11-26T13:45:02.016267,1.31920395934801,103.745637393049
+Fuhua,Jurong West,5 Jurong West Street 41,-,12,23,27,-,13,23,27,-,14,23,28,https://sgschooling.com/secondary/fuhua,2025-11-26T13:45:02.016294,1.34701408913756,103.72652089832
+Presbyterian High,Ang Mo Kio,5209 Ang Mo Kio Avenue 6,-,12,24,28,-,13,23,28,-,14,23,28,https://sgschooling.com/secondary/presbyterian-high,2025-11-26T13:45:02.016322,1.38175437421949,103.842382968794
+Tanjong Katong Girls’,Marine Parade,20 Dunman Lane,-,12,23,-,-,13,25,-,-,14,-,-,https://sgschooling.com/secondary/tanjong-katong-girls,2025-11-26T13:45:02.016349,1.3075626184394,103.896107204542
+Tanjong Katong,Marine Parade,130 Haig Road,-,12,22,-,-,13,25,-,-,14,-,-,https://sgschooling.com/secondary/tanjong-katong,2025-11-26T13:45:02.016380,1.30873515955341,103.897225196199
+Yishun Town,Yishun,6 Yishun Street 21,-,12,22,27,-,13,22,27,-,13,22,27,https://sgschooling.com/secondary/yishun-town,2025-11-26T13:45:02.016408,1.43232156717386,103.838094226361
+Zhonghua,Serangoon,13 Serangoon Avenue 3,-,12,23,27,-,13,23,27,-,14,23,28,https://sgschooling.com/secondary/zhonghua,2025-11-26T13:45:02.016435,1.34840720846208,103.869430481414
+CHIJ Katong Convent,Marine Parade,346 Marine Terrace,--,1320,2425,3028,-,-,-,-,-,-,-,-,https://sgschooling.com/secondary/chij-katong-convent,2025-11-26T13:45:02.016474,1.30644268034894,103.917144350028
+CHIJ St. Joseph’s Convent,Seng Kang,62 Sengkang East Way,--,1320,2325,2629,-,-,-,-,-,-,-,-,https://sgschooling.com/secondary/chij-st-josephs-convent,2025-11-26T13:45:02.016511,1.39175222260369,103.902464991543
+Clementi Town,Clementi,10 Clementi Ave 3,-,13,23,28,-,13,23,28,-,14,23,27,https://sgschooling.com/secondary/clementi-town,2025-11-26T13:45:02.016539,1.31553912945073,103.762020598524
+Dunman,Tampines,21 Tampines Street 45,-,13,23,27,-,14,23,27,-,15,23,27,https://sgschooling.com/secondary/dunman,2025-11-26T13:45:02.016568,1.36065258337022,103.956213906966
+Edgefield,Punggol,36 Punggol Field,-,13,22,26,-,14,22,26,-,15,22,27,https://sgschooling.com/secondary/edgefield,2025-11-26T13:45:02.016597,1.40059309981824,103.902687385465
+Geylang Methodist (Secondary),Geylang,2 Geylang East Central,--,1321,2325,2828,-,-,-,-,-,-,-,-,https://sgschooling.com/secondary/geylang-methodist-secondary,2025-11-26T13:45:02.016634,1.31764900474601,103.882661129303
+Holy Innocents’ High,Hougang,1191 Upper Serangoon Road,--,1322,2225,2729,-,-,-,-,-,-,-,-,https://sgschooling.com/secondary/holy-innocents-high,2025-11-26T13:45:02.016671,1.37154508822261,103.896398814264
+Kranji,Choa Chu Kang,61 Choa Chu Kang Street 51,-,13,23,27,-,14,23,27,-,15,23,27,https://sgschooling.com/secondary/kranji,2025-11-26T13:45:02.016699,1.39005109871311,103.741190664845
+Riverside,Woodlands,3 Woodlands Street 81,-,13,23,28,-,14,23,27,-,15,23,28,https://sgschooling.com/secondary/riverside,2025-11-26T13:45:02.016726,1.44110157139127,103.78830823641
+St. Hilda’s,Tampines,2 Tampines Street 82,--,1322,2325,2728,-,-,-,-,-,-,-,-,https://sgschooling.com/secondary/st-hildas,2025-11-26T13:45:02.016765,1.34973922385379,103.937608032148
+Xinmin,Hougang,11 Hougang Avenue 8,-,13,23,26,-,15,23,27,-,16,23,27,https://sgschooling.com/secondary/xinmin,2025-11-26T13:45:02.016793,1.37255884700002,103.88305161385
+Bukit Batok,Bukit Batok,50 Bukit Batok West Ave 8,-,14,23,27,-,15,23,28,-,16,24,28,https://sgschooling.com/secondary/bukit-batok,2025-11-26T13:45:02.016821,1.34849111079052,103.74087370482
+Evergreen,Woodlands,11 Woodlands Street 83,-,14,23,28,-,16,23,28,-,16,23,30,https://sgschooling.com/secondary/evergreen,2025-11-26T13:45:02.016848,1.44149131273737,103.794137756171
+Gan Eng Seng,Bukit Merah,1 Henderson Road,-,14,23,28,-,15,23,27,-,16,24,27,https://sgschooling.com/secondary/gan-eng-seng,2025-11-26T13:45:02.016876,1.28907114485773,103.823733673089
+Hua Yi,Jurong West,60 Jurong West St 42,-,14,22,26,-,15,23,26,-,16,23,26,https://sgschooling.com/secondary/hua-yi,2025-11-26T13:45:02.016904,1.35234365488339,103.721832320169
+Pei Hwa,Seng Kang,21 Fernvale Link,-,14,22,26,-,16,23,26,-,17,23,26,https://sgschooling.com/secondary/pei-hwa,2025-11-26T13:45:02.016934,1.39037504993234,103.878461745339
+St. Anthony’s Canossian,Bedok,1600 Bedok North Avenue 4,--,1422,2525,2828,-,-,-,-,-,-,-,-,https://sgschooling.com/secondary/st-anthonys-canossian,2025-11-26T13:45:02.016970,1.33466313498855,103.941977166932
+Yusof Ishak,Punggol,8 Sumang Walk,-,14,22,26,-,15,23,26,-,16,22,26,https://sgschooling.com/secondary/yusof-ishak,2025-11-26T13:45:02.017000,1.40693702458178,103.896275149571
+Ang Mo Kio,Ang Mo Kio,6 Ang Mo Kio Street 22,-,15,24,28,-,16,24,28,-,18,24,28,https://sgschooling.com/secondary/ang-mo-kio,2025-11-26T13:45:02.017027,1.36733710171069,103.842154973672
+Bowen,Hougang,2 Lorong Napiri,-,15,23,27,-,16,24,28,-,17,23,28,https://sgschooling.com/secondary/bowen,2025-11-26T13:45:02.017054,1.37035994436209,103.877659577677
+Hai Sing Catholic,Pasir Ris,15 Pasir Ris Street 21,-,15,23,28,-,17,24,28,-,18,24,28,https://sgschooling.com/secondary/hai-sing-catholic,2025-11-26T13:45:02.017081,1.36933055696636,103.962762942764
+Jurong,Jurong West,31 Yuan Ching Road,-,15,23,27,-,15,23,27,-,16,24,28,https://sgschooling.com/secondary/jurong,2025-11-26T13:45:02.017108,1.33002032220942,103.723952961648
+St. Gabriel’s,Serangoon,24 Serangoon Avenue 1,--,1522,2325,2828,-,-,-,-,-,-,-,-,https://sgschooling.com/secondary/st-gabriels,2025-11-26T13:45:02.017148,1.34648798732177,103.876094163287
+Bedok View,Bedok,6 Bedok South Avenue 3,-,16,24,28,-,17,24,29,-,18,25,30,https://sgschooling.com/secondary/bedok-view,2025-11-26T13:45:02.017175,1.32415704029686,103.943776245024
+Deyi,Ang Mo Kio,1 Ang Mo Kio Street 42,-,16,25,28,-,17,24,29,-,18,25,30,https://sgschooling.com/secondary/deyi,2025-11-26T13:45:02.017202,1.36599702567717,103.852545772422
+Greendale,Punggol,51 Edgedale Plains,-,16,23,27,-,17,23,27,-,18,23,27,https://sgschooling.com/secondary/greendale,2025-11-26T13:45:02.017228,1.39696019936894,103.91170014084
+Jurong West,Jurong West,61 Jurong West Street 65,-,16,24,28,-,17,24,28,-,18,24,27,https://sgschooling.com/secondary/jurong-west,2025-11-26T13:45:02.017256,1.33525634688323,103.702098904443
+Queensway,Queenstown,2A Margaret Drive,-,16,24,27,-,17,24,28,-,18,24,27,https://sgschooling.com/secondary/queensway,2025-11-26T13:45:02.017282,1.30022271592188,103.802207291625
+West Spring,Bukit Panjang,61 Senja  Road,-,16,24,27,-,16,24,27,-,17,23,27,https://sgschooling.com/secondary/west-spring,2025-11-26T13:45:02.017309,1.38782283303782,103.760128840155
+Ahmad Ibrahim,Yishun,751 Yishun Avenue 7,-,17,23,28,-,17,24,28,-,17,24,28,https://sgschooling.com/secondary/ahmad-ibrahim,2025-11-26T13:45:02.017336,1.43605975368804,103.829718690077
+Beatty,Toa Payoh,1 Toa Payoh North,-,17,25,28,-,18,24,28,-,18,24,28,https://sgschooling.com/secondary/beatty,2025-11-26T13:45:02.017362,1.341790284928,103.852280842345
+Christ Church,Woodlands,20 Woodlands Drive 17,-,17,24,29,-,18,24,28,-,18,24,30,https://sgschooling.com/secondary/christ-church,2025-11-26T13:45:02.017389,1.42656780901455,103.793451105242
+Hillgrove,Bukit Batok,10 Bukit Batok Street 52,-,17,23,30,-,18,24,28,-,19,25,28,https://sgschooling.com/secondary/hillgrove,2025-11-26T13:45:02.017415,1.35273576615912,103.752986488399
+Mayflower,Ang Mo Kio,2 Ang Mo Kio Street 21,-,17,25,28,-,18,24,30,-,18,24,30,https://sgschooling.com/secondary/mayflower,2025-11-26T13:45:02.017442,1.36827266209722,103.835360726863
+North Vista,Seng Kang,11 Rivervale Link,-,17,24,27,-,18,24,27,-,19,24,28,https://sgschooling.com/secondary/north-vista,2025-11-26T13:45:02.017469,1.381131285358,103.899188813886
+Pasir Ris Crest,Pasir Ris,11 Pasir Ris Street 41,-,17,24,28,-,18,24,28,-,19,24,28,https://sgschooling.com/secondary/pasir-ris-crest,2025-11-26T13:45:02.017495,1.37284060102246,103.959728202919
+Pasir Ris,Tampines,390 Tampines Street 21,-,17,23,27,-,18,23,27,-,19,24,28,https://sgschooling.com/secondary/pasir-ris,2025-11-26T13:45:02.017522,1.35422732653396,103.948962626204
+Bedok South,Bedok,1 Jalan Langgar Bedok,-,18,25,28,-,19,25,30,-,20,25,28,https://sgschooling.com/secondary/bedok-south,2025-11-26T13:45:02.017549,1.32513655159184,103.950989139261
+Compassvale,Seng Kang,51 Compassvale Crescent,-,18,24,27,-,19,24,27,-,19,24,27,https://sgschooling.com/secondary/compassvale,2025-11-26T13:45:02.017575,1.39614083952009,103.899847164494
+Kent Ridge,Clementi,147 West Coast Road,-,18,24,30,-,19,24,30,-,19,24,28,https://sgschooling.com/secondary/kent-ridge,2025-11-26T13:45:02.017602,1.30122773426098,103.764889617566
+Naval Base,Yishun,901 Yishun Ring Road,-,18,24,27,-,19,24,28,-,20,24,28,https://sgschooling.com/secondary/naval-base,2025-11-26T13:45:02.017628,1.41937881620441,103.831050390247
+Orchid Park,Yishun,10 Yishun Street 81,-,18,23,27,-,18,24,27,-,19,24,27,https://sgschooling.com/secondary/orchid-park,2025-11-26T13:45:02.017655,1.41532032779634,103.837859241343
+Tampines,Tampines,252 Tampines St 12,-,18,24,28,-,19,24,28,-,20,24,28,https://sgschooling.com/secondary/tampines,2025-11-26T13:45:02.017681,1.34926094811197,103.944263709507
+Unity,Choa Chu Kang,20 Choa Chu Kang Street 62,-,18,24,27,-,19,24,28,-,20,24,28,https://sgschooling.com/secondary/unity,2025-11-26T13:45:02.017708,1.40001524119441,103.74602091483
+Yuan Ching,Jurong West,103 Yuan Ching Road,-,18,24,28,-,19,24,28,-,19,25,29,https://sgschooling.com/secondary/yuan-ching,2025-11-26T13:45:02.017735,1.34200635764467,103.72089870437
+Bukit View,Bukit Batok,16 Bukit Batok Street 21,-,19,24,30,-,19,24,30,-,19,25,30,https://sgschooling.com/secondary/bukit-view,2025-11-26T13:45:02.017762,1.3457330554294,103.752226593984
+Peirce,Bishan,10 Sin Ming Walk,-,19,25,30,-,20,25,30,-,20,25,30,https://sgschooling.com/secondary/peirce,2025-11-26T13:45:02.017791,1.36665944653812,103.83021606804
+Punggol,Punggol,51 Edgefield Plains,-,19,23,27,-,20,23,27,-,20,24,27,https://sgschooling.com/secondary/punggol,2025-11-26T13:45:02.017818,1.40205738421399,103.909213706482
+Seng Kang,Seng Kang,10 Compassvale Lane,-,19,24,27,-,20,24,27,-,20,24,28,https://sgschooling.com/secondary/seng-kang,2025-11-26T13:45:02.017845,1.38659683143747,103.898365036709
+Woodgrove,Woodlands,3 Woodlands Avenue 6,-,19,24,28,-,20,24,28,-,20,24,28,https://sgschooling.com/secondary/woodgrove,2025-11-26T13:45:02.017872,1.42831828137013,103.79604758539
+Yishun,Yishun,4 Yishun Street 71,-,19,24,27,-,20,24,28,-,20,24,28,https://sgschooling.com/secondary/yishun,2025-11-26T13:45:02.017898,1.42813324276086,103.828764316679
+Zhenghua,Bukit Panjang,62 Bukit Panjang Ring Road,-,19,24,27,-,19,24,27,-,20,24,27,https://sgschooling.com/secondary/zhenghua,2025-11-26T13:45:02.017925,1.38836583415352,103.765510638527
+Admiralty,Woodlands,31 Woodlands Crescent,-,20,25,28,-,21,25,28,-,21,25,28,https://sgschooling.com/secondary/admiralty,2025-11-26T13:45:02.017952,1.44589068910993,103.802398196596
+Bedok Green,Bedok,360 Bedok North Ave 3,-,20,25,27,-,20,25,30,-,20,25,27,https://sgschooling.com/secondary/bedok-green,2025-11-26T13:45:02.017979,1.33451947288431,103.935028383346
+Chua Chu Kang,Choa Chu Kang,31 Teck Whye Crescent,-,20,25,27,-,20,24,27,-,21,25,28,https://sgschooling.com/secondary/chua-chu-kang,2025-11-26T13:45:02.018006,1.38333422637073,103.75510327583
+Hougang,Hougang,2 Hougang Street 93,-,20,24,28,-,22,24,28,-,22,24,30,https://sgschooling.com/secondary/hougang,2025-11-26T13:45:02.018033,1.37764019332164,103.882533963338
+Jurongville,Jurong East,202 Jurong East Avenue 1,-,20,25,28,-,20,25,28,-,20,25,28,https://sgschooling.com/secondary/jurongville,2025-11-26T13:45:02.018062,1.35128862770284,103.728907710089
+New Town,Queenstown,1020 Dover Road,-,21,25,30,-,20,25,30,-,20,25,30,https://sgschooling.com/secondary/new-town,2025-11-26T13:45:02.018091,1.30977590011357,103.77318863421
+Peicai,Serangoon,10 Serangoon Avenue 4,-,21,25,29,-,22,25,29,-,22,25,30,https://sgschooling.com/secondary/peicai,2025-11-26T13:45:02.018118,1.35951583222214,103.870010749055
+Yuhua,Jurong West,35 Jurong West Street 41,-,21,25,28,-,22,25,28,-,22,25,30,https://sgschooling.com/secondary/yuhua,2025-11-26T13:45:02.018147,1.34718626876968,103.722687235839
+Assumption English,Bukit Panjang,622 Upper Bukit Timah Road,-,22,25,29,-,22,25,29,-,22,25,30,https://sgschooling.com/secondary/assumption-english,2025-11-26T13:45:02.018175,1.36838160662857,103.766687526556
+Bartley,Toa Payoh,10 Jalan Bunga Rampai,-,22,25,29,-,22,25,29,-,22,25,29,https://sgschooling.com/secondary/bartley,2025-11-26T13:45:02.018201,1.33995415587811,103.882806211705
+Bendemeer,Kallang,1 St Wilfred Road,-,22,25,28,-,22,25,29,-,22,25,29,https://sgschooling.com/secondary/bendemeer,2025-11-26T13:45:02.018229,1.32434843114787,103.860518349544
+Boon Lay,Jurong West,11 Jurong West Street 65,-,22,25,30,-,22,25,30,-,22,25,30,https://sgschooling.com/secondary/boon-lay,2025-11-26T13:45:02.018256,1.34272216334333,103.701891453912
+Broadrick,Geylang,61 Dakota Crescent,-,22,25,28,-,22,25,30,-,22,25,30,https://sgschooling.com/secondary/broadrick,2025-11-26T13:45:02.018283,1.30705061123433,103.886917922608
+Bukit Merah,Bukit Merah,10 Lengkok Bahru,-,22,25,30,-,22,25,30,-,22,25,28,https://sgschooling.com/secondary/bukit-merah,2025-11-26T13:45:02.018310,1.28569283064288,103.813438929393
+Canberra,Sembawang,51 Sembawang Drive,-,22,25,29,-,22,25,28,-,22,25,30,https://sgschooling.com/secondary/canberra,2025-11-26T13:45:02.018338,1.45319086315972,103.814203583818
+Changkat Changi,Tampines,23 Simei St 3,-,22,25,30,-,22,25,30,-,22,25,30,https://sgschooling.com/secondary/changkat-changi,2025-11-26T13:45:02.018365,1.33950630072876,103.953245525564
+Damai,Bedok,4800 Bedok Reservoir Road,-,22,25,30,-,22,25,30,-,22,25,30,https://sgschooling.com/secondary/damai,2025-11-26T13:45:02.018548,1.33692798510393,103.927091653438
+Dunearn,Bukit Batok,21 Bukit Batok West Avenue 2,-,22,25,30,-,22,25,29,-,22,25,30,https://sgschooling.com/secondary/dunearn,2025-11-26T13:45:02.018595,1.36357900792871,103.74472109107
+East Spring,Tampines,30 Tampines Street 34,-,22,25,30,-,22,25,29,-,22,25,28,https://sgschooling.com/secondary/east-spring,2025-11-26T13:45:02.018627,1.35622508992581,103.960640700298
+Greenridge,Bukit Panjang,31 Gangsa Road,-,22,25,28,-,22,25,28,-,22,25,28,https://sgschooling.com/secondary/greenridge,2025-11-26T13:45:02.018657,1.375600053443,103.763998914082
+Guangyang,Bishan,8 Bishan Street 12,-,22,25,30,-,22,25,30,-,22,25,30,https://sgschooling.com/secondary/guangyang,2025-11-26T13:45:02.018687,1.34440856042912,103.850208933626
+Junyuan,Tampines,11 Tampines Street 84,-,22,24,29,-,22,25,28,-,22,25,28,https://sgschooling.com/secondary/junyuan,2025-11-26T13:45:02.018718,1.35361315263537,103.933886165824
+Juying,Jurong West,33 Jurong West Street 91,-,22,25,30,-,22,25,28,-,22,25,30,https://sgschooling.com/secondary/juying,2025-11-26T13:45:02.018750,1.3387227734133,103.687310264575
+Loyang View,Pasir Ris,12 Pasir Ris Street 11,-,22,25,30,-,22,25,30,-,22,25,30,https://sgschooling.com/secondary/loyang-view,2025-11-26T13:45:02.018782,1.36658417167238,103.956944585725
+Manjusri,Geylang,20 Ubi Avenue 1,--,2222,2525,2828,-,-,-,-,-,-,-,-,https://sgschooling.com/secondary/manjusri,2025-11-26T13:45:02.018826,1.32747123084846,103.901719963831
+Marsiling,Woodlands,12 Marsiling Road,-,22,25,28,-,22,25,29,-,22,25,30,https://sgschooling.com/secondary/marsiling,2025-11-26T13:45:02.018863,1.43664424769955,103.776008090454
+Meridian,Pasir Ris,31 Pasir Ris Street 51,-,22,25,29,-,22,24,27,-,22,24,28,https://sgschooling.com/secondary/meridian,2025-11-26T13:45:02.018896,1.3672468492013,103.948972483629
+Montfort,Hougang,50 Hougang Avenue 8,--,2222,2425,2828,-,-,-,-,-,-,-,-,https://sgschooling.com/secondary/montfort,2025-11-26T13:45:02.018934,1.37396131656912,103.888928372577
+Northbrooks,Yishun,585 Yishun Ring Road,-,22,24,28,-,22,25,28,-,22,25,27,https://sgschooling.com/secondary/northbrooks,2025-11-26T13:45:02.018978,1.42081285020652,103.845147332528
+Northland,Yishun,3 Yishun Street 22,-,22,25,28,-,22,25,30,-,22,25,28,https://sgschooling.com/secondary/northland,2025-11-26T13:45:02.019011,1.43580183362637,103.840104687784
+Outram,Central,3 York Hill,-,22,25,30,-,22,25,30,-,22,25,30,https://sgschooling.com/secondary/outram,2025-11-26T13:45:02.019043,1.28651357464735,103.837127264403
+Queenstown,Queenstown,1 Strathmore Road,-,22,25,29,-,22,25,28,-,22,25,28,https://sgschooling.com/secondary/queenstown,2025-11-26T13:45:02.019072,1.29352126774652,103.813190980055
+Regent,Choa Chu Kang,50 Choa Chu Kang North 5,-,22,25,28,-,22,25,28,-,22,25,30,https://sgschooling.com/secondary/regent,2025-11-26T13:45:02.019100,1.39327908335682,103.751034411529
+Sembawang,Sembawang,30 Sembawang Crescent,-,22,25,29,-,22,25,30,-,22,25,30,https://sgschooling.com/secondary/sembawang,2025-11-26T13:45:02.019129,1.44531502131387,103.816843258118
+Serangoon Garden,Serangoon,21 Serangoon North Avenue 1,-,22,25,29,-,22,25,29,-,22,25,29,https://sgschooling.com/secondary/serangoon-garden,2025-11-26T13:45:02.019162,1.36932570490947,103.869270301476
+Serangoon,Hougang,11 Upper Serangoon View,-,22,24,28,-,22,25,28,-,22,24,28,https://sgschooling.com/secondary/serangoon,2025-11-26T13:45:02.019190,1.37465538827443,103.902138740699
+Springfield,Tampines,30 Tampines Avenue 8,-,22,25,29,-,22,25,30,-,22,25,30,https://sgschooling.com/secondary/springfield,2025-11-26T13:45:02.019217,1.34957303471476,103.930354460693
+Westwood,Jurong West,11 Jurong West Street 25,-,22,25,28,-,22,25,29,-,22,25,30,https://sgschooling.com/secondary/westwood,2025-11-26T13:45:02.019245,1.35373698510994,103.701772102139
+Whitley,Bishan,30 Bishan Street 24,-,22,25,30,-,22,25,30,-,22,25,30,https://sgschooling.com/secondary/whitley,2025-11-26T13:45:02.019273,1.35505208480649,103.842552378136
+Woodlands Ring,Woodlands,21 Woodlands Avenue 1,-,22,25,29,-,22,25,28,-,21,25,30,https://sgschooling.com/secondary/woodlands-ring,2025-11-26T13:45:02.019301,1.43070452883799,103.777625748539
+Woodlands,Woodlands,11 Marsiling Road,-,22,25,28,-,22,25,29,-,22,25,30,https://sgschooling.com/secondary/woodlands,2025-11-26T13:45:02.019328,1.43912528141356,103.774586410437
+Yio Chu Kang,Ang Mo Kio,3063 Ang Mo Kio Avenue 5,-,22,25,30,-,22,25,30,-,22,25,30,https://sgschooling.com/secondary/yio-chu-kang,2025-11-26T13:45:02.019359,1.37797597740925,103.84213696352
+Yuying,Hougang,47 Hougang Avenue 1,-,22,25,29,-,22,25,29,-,22,25,29,https://sgschooling.com/secondary/yuying,2025-11-26T13:45:02.019387,1.35713595302467,103.890194755287
