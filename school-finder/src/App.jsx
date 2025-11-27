@@ -86,6 +86,8 @@ function App() {
   const [locationError, setLocationError] = useState('');
   const [maxDistance, setMaxDistance] = useState(50); // km
   const [useHistoricalMax, setUseHistoricalMax] = useState(false);
+  const [affiliatedSchool, setAffiliatedSchool] = useState(''); // School name the student is affiliated with
+  const [genderFilter, setGenderFilter] = useState('all'); // 'all', 'mixed', 'boys', 'girls'
   const [sortBy, setSortBy] = useState('name'); // 'name' or 'distance'
 
   // Helper function to extract numeric score from score string
@@ -105,6 +107,42 @@ function App() {
         return parseInt(digitsOnly);
       }
     }
+  };
+
+  // Helper function to get the column name for a group
+  // Uses affiliated suffix only if this school is the student's affiliated school
+  const getColumnName = (year, group, schoolName) => {
+    // IP doesn't have affiliated cutoffs
+    if (group === 'IP') {
+      return `${year}_${group}`;
+    }
+    // For PG1, PG2, PG3 - use affiliated column only for the student's affiliated school
+    if (affiliatedSchool && schoolName === affiliatedSchool) {
+      return `${year}_${group}_Aff`;
+    }
+    return `${year}_${group}`;
+  };
+
+  // Helper function to get school gender type from CSV data
+  const getSchoolGender = (school) => {
+    return school.Gender || 'mixed';
+  };
+
+  // Get list of schools that have affiliated cutoff data
+  const getSchoolsWithAffiliation = () => {
+    return schools
+      .filter(school => {
+        // Check if school has any affiliated cutoff data
+        const hasAffData = ['2025', '2024', '2023'].some(year =>
+          ['PG1', 'PG2', 'PG3'].some(group => {
+            const val = school[`${year}_${group}_Aff`];
+            return val && val !== '-' && val !== '--';
+          })
+        );
+        return hasAffData;
+      })
+      .map(school => school['School Name'])
+      .sort();
   };
 
   useEffect(() => {
@@ -172,6 +210,7 @@ function App() {
 
     // Filter by AL score - show schools user can get into for any eligible group
     filtered = filtered.filter(school => {
+      const schoolName = school['School Name'];
       // Check each eligible group
       for (const group of groups) {
         let numericScore;
@@ -180,7 +219,10 @@ function App() {
           // Get scores from all 3 years and use the maximum
           const years = ['2025', '2024', '2023'];
           const scores = years
-            .map(year => extractNumericScore(school[`${year}_${group}`], group))
+            .map(year => {
+              const colName = getColumnName(year, group, schoolName);
+              return extractNumericScore(school[colName], group);
+            })
             .filter(s => s !== null && !isNaN(s));
 
           if (scores.length > 0) {
@@ -188,7 +230,8 @@ function App() {
           }
         } else {
           // Use 2025 only
-          numericScore = extractNumericScore(school[`2025_${group}`], group);
+          const colName = getColumnName('2025', group, schoolName);
+          numericScore = extractNumericScore(school[colName], group);
         }
 
         // If school has a valid COP for this group and user qualifies
@@ -200,6 +243,14 @@ function App() {
       }
       return false;
     });
+
+    // Filter by gender type
+    if (genderFilter !== 'all') {
+      filtered = filtered.filter(school => {
+        const schoolGender = getSchoolGender(school);
+        return schoolGender === genderFilter;
+      });
+    }
 
     // Filter by location proximity
     const effectiveLocation = userLocation || (selectedTown && TOWN_COORDS[selectedTown]);
@@ -243,15 +294,17 @@ function App() {
     }
 
     setFilteredSchools(filtered);
-  }, [schools, myScore, maxCutoff, selectedTown, userLocation, maxDistance, useHistoricalMax, sortBy]);
+  }, [schools, myScore, maxCutoff, selectedTown, userLocation, maxDistance, useHistoricalMax, affiliatedSchool, genderFilter, sortBy]);
 
   const getScoreDisplay = (school) => {
     // Show COP for all eligible groups
     const groups = getEligibleGroups(myScore);
+    const schoolName = school['School Name'];
     const scores = [];
 
     for (const group of groups) {
-      const score = school[`2025_${group}`];
+      const colName = getColumnName('2025', group, schoolName);
+      const score = school[colName];
       if (score && score !== '-' && score !== '--') {
         scores.push(`${GROUP_DISPLAY_NAMES[group]}: ${score}`);
       }
@@ -301,6 +354,21 @@ function App() {
         </div>
 
         <div className="filter-group">
+          <label>
+            School Type:
+            <select
+              value={genderFilter}
+              onChange={(e) => setGenderFilter(e.target.value)}
+            >
+              <option value="all">All schools</option>
+              <option value="mixed">Co-ed (Mixed)</option>
+              <option value="boys">Boys</option>
+              <option value="girls">Girls</option>
+            </select>
+          </label>
+        </div>
+
+        <div className="filter-group">
           <label className="checkbox-label">
             <input
               type="checkbox"
@@ -311,6 +379,24 @@ function App() {
           </label>
           <p className="filter-hint">
             Include schools if their cut-off was high enough in any of the past 3 years (2023-2025)
+          </p>
+        </div>
+
+        <div className="filter-group">
+          <label>
+            Affiliated Secondary School:
+            <select
+              value={affiliatedSchool}
+              onChange={(e) => setAffiliatedSchool(e.target.value)}
+            >
+              <option value="">None (not affiliated)</option>
+              {getSchoolsWithAffiliation().map(name => (
+                <option key={name} value={name}>{name}</option>
+              ))}
+            </select>
+          </label>
+          <p className="filter-hint">
+            If you're from an affiliated primary school, select the secondary school to use easier cut-off points for that school only
           </p>
         </div>
 
@@ -414,7 +500,7 @@ function App() {
                 )}
               </div>
               <div className="cop-history">
-                <h4>Cut-Off Points (COP)</h4>
+                <h4>Cut-Off Points (COP){affiliatedSchool === school['School Name'] ? ' - Affiliated' : ''}</h4>
                 <table className="cop-table">
                   <thead>
                     <tr>
@@ -428,9 +514,10 @@ function App() {
                     {['2025', '2024', '2023'].map(year => (
                       <tr key={year}>
                         <td>{year}</td>
-                        {eligibleGroups.map(group => (
-                          <td key={group}>{school[`${year}_${group}`] || '-'}</td>
-                        ))}
+                        {eligibleGroups.map(group => {
+                          const colName = getColumnName(year, group, school['School Name']);
+                          return <td key={group}>{school[colName] || '-'}</td>;
+                        })}
                       </tr>
                     ))}
                   </tbody>

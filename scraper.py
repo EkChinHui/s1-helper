@@ -61,11 +61,26 @@ class SchoolScraper:
         parser = MainPageParser(response.text)
         return parser.parse()
 
-    def _scrape_detail_pages(self):
-        """Scrape all individual school detail pages"""
+    def _scrape_detail_pages(self, preview_count: int = 15):
+        """Scrape all individual school detail pages with preview confirmation"""
         total = len(self.schools)
 
         for i, school in enumerate(self.schools, 1):
+            # Pause after preview_count schools for user confirmation
+            if i == preview_count + 1:
+                logger.info(f"\n{'=' * 60}")
+                logger.info(f"Preview complete: {preview_count} schools scraped")
+                logger.info(f"Remaining: {total - preview_count} schools")
+                logger.info("=" * 60)
+
+                response = input("\nContinue scraping remaining schools? [Y/n]: ").strip().lower()
+                if response in ['n', 'no']:
+                    logger.info("Scraping stopped by user. Exporting preview data...")
+                    # Trim schools list to only include scraped ones
+                    self.schools = self.schools[:preview_count]
+                    return
+                logger.info("\nContinuing with remaining schools...\n")
+
             try:
                 logger.info(f"[{i}/{total}] {school.name}")
 
@@ -77,18 +92,49 @@ class SchoolScraper:
                 school.town = town
                 school.address = address
 
-                # Update historical cut-off data
+                # Update historical cut-off data (including 2025 affiliated from detail page)
+                if "2025" in historical_data:
+                    # Only update affiliated cutoffs for 2025 (non-affiliated comes from main page)
+                    school.cutoff_2025_ip_aff = historical_data["2025"].get("ip_aff")
+                    school.cutoff_2025_ip_aff_hcl = historical_data["2025"].get("ip_aff_hcl")
+                    school.cutoff_2025_pg3_aff = historical_data["2025"].get("pg3_aff")
+                    school.cutoff_2025_pg3_aff_hcl = historical_data["2025"].get("pg3_aff_hcl")
+                    school.cutoff_2025_pg2_aff = historical_data["2025"].get("pg2_aff")
+                    school.cutoff_2025_pg2_aff_hcl = historical_data["2025"].get("pg2_aff_hcl")
+                    school.cutoff_2025_pg1_aff = historical_data["2025"].get("pg1_aff")
+                    school.cutoff_2025_pg1_aff_hcl = historical_data["2025"].get("pg1_aff_hcl")
+
                 if "2024" in historical_data:
                     school.cutoff_2024_ip = historical_data["2024"].get("ip")
+                    school.cutoff_2024_ip_hcl = historical_data["2024"].get("ip_hcl")
                     school.cutoff_2024_pg3 = historical_data["2024"].get("pg3")
                     school.cutoff_2024_pg2 = historical_data["2024"].get("pg2")
                     school.cutoff_2024_pg1 = historical_data["2024"].get("pg1")
+                    # Affiliated cutoffs
+                    school.cutoff_2024_ip_aff = historical_data["2024"].get("ip_aff")
+                    school.cutoff_2024_ip_aff_hcl = historical_data["2024"].get("ip_aff_hcl")
+                    school.cutoff_2024_pg3_aff = historical_data["2024"].get("pg3_aff")
+                    school.cutoff_2024_pg3_aff_hcl = historical_data["2024"].get("pg3_aff_hcl")
+                    school.cutoff_2024_pg2_aff = historical_data["2024"].get("pg2_aff")
+                    school.cutoff_2024_pg2_aff_hcl = historical_data["2024"].get("pg2_aff_hcl")
+                    school.cutoff_2024_pg1_aff = historical_data["2024"].get("pg1_aff")
+                    school.cutoff_2024_pg1_aff_hcl = historical_data["2024"].get("pg1_aff_hcl")
 
                 if "2023" in historical_data:
                     school.cutoff_2023_ip = historical_data["2023"].get("ip")
+                    school.cutoff_2023_ip_hcl = historical_data["2023"].get("ip_hcl")
                     school.cutoff_2023_pg3 = historical_data["2023"].get("pg3")
                     school.cutoff_2023_pg2 = historical_data["2023"].get("pg2")
                     school.cutoff_2023_pg1 = historical_data["2023"].get("pg1")
+                    # Affiliated cutoffs
+                    school.cutoff_2023_ip_aff = historical_data["2023"].get("ip_aff")
+                    school.cutoff_2023_ip_aff_hcl = historical_data["2023"].get("ip_aff_hcl")
+                    school.cutoff_2023_pg3_aff = historical_data["2023"].get("pg3_aff")
+                    school.cutoff_2023_pg3_aff_hcl = historical_data["2023"].get("pg3_aff_hcl")
+                    school.cutoff_2023_pg2_aff = historical_data["2023"].get("pg2_aff")
+                    school.cutoff_2023_pg2_aff_hcl = historical_data["2023"].get("pg2_aff_hcl")
+                    school.cutoff_2023_pg1_aff = historical_data["2023"].get("pg1_aff")
+                    school.cutoff_2023_pg1_aff_hcl = historical_data["2023"].get("pg1_aff_hcl")
 
                 logger.info(f"  → {town}, {address}")
 

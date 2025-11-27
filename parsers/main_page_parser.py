@@ -71,16 +71,35 @@ class MainPageParser:
             detail_url = f"{Config.BASE_URL}{detail_url}"
 
         # Extract cut-off points (2025 data from main page)
-        ip_cutoff = School.clean_cutoff_value(cells[2].get_text(strip=True))
-        pg3_cutoff = School.clean_cutoff_value(cells[3].get_text(strip=True))
-        pg2_cutoff = School.clean_cutoff_value(cells[4].get_text(strip=True))
-        pg1_cutoff = School.clean_cutoff_value(cells[5].get_text(strip=True))
+        # clean_cutoff_value returns (score, hcl_grade) tuple
+        ip_raw = cells[2].get_text(strip=True)
+        pg3_raw = cells[3].get_text(strip=True)
+        pg2_raw = cells[4].get_text(strip=True)
+        pg1_raw = cells[5].get_text(strip=True)
+
+        ip_cutoff, ip_hcl = School.clean_cutoff_value(ip_raw)
+        pg3_cutoff, _ = School.clean_cutoff_value(pg3_raw)
+        pg2_cutoff, _ = School.clean_cutoff_value(pg2_raw)
+        pg1_cutoff, _ = School.clean_cutoff_value(pg1_raw)
+
+        # Also extract affiliated values if present in combined format (e.g., "6M8M")
+        ip_aff, ip_aff_hcl = School.clean_cutoff_value_affiliated(ip_raw)
+        pg3_aff, pg3_aff_hcl = School.clean_cutoff_value_affiliated(pg3_raw)
+        pg2_aff, pg2_aff_hcl = School.clean_cutoff_value_affiliated(pg2_raw)
+        pg1_aff, pg1_aff_hcl = School.clean_cutoff_value_affiliated(pg1_raw)
 
         return School(
             name=school_name,
             detail_url=detail_url,
             cutoff_2025_ip=ip_cutoff,
+            cutoff_2025_ip_hcl=ip_hcl,
             cutoff_2025_pg3=pg3_cutoff,
             cutoff_2025_pg2=pg2_cutoff,
             cutoff_2025_pg1=pg1_cutoff,
+            cutoff_2025_pg3_aff=pg3_aff,
+            cutoff_2025_pg3_aff_hcl=pg3_aff_hcl,
+            cutoff_2025_pg2_aff=pg2_aff,
+            cutoff_2025_pg2_aff_hcl=pg2_aff_hcl,
+            cutoff_2025_pg1_aff=pg1_aff,
+            cutoff_2025_pg1_aff_hcl=pg1_aff_hcl,
         )
