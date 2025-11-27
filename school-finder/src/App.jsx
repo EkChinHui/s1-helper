@@ -89,6 +89,7 @@ function App() {
   const [affiliatedSchool, setAffiliatedSchool] = useState(''); // School name the student is affiliated with
   const [genderFilter, setGenderFilter] = useState('all'); // 'all', 'mixed', 'boys', 'girls'
   const [sortBy, setSortBy] = useState('name'); // 'name' or 'distance'
+  const [hmtFilter, setHmtFilter] = useState([]); // ['HCL', 'HTL', 'HML']
 
   // Helper function to extract numeric score from score string
   const extractNumericScore = (score, stream) => {
@@ -252,6 +253,13 @@ function App() {
       });
     }
 
+    // Filter by Higher Mother Tongue languages
+    if (hmtFilter.length > 0) {
+      filtered = filtered.filter(school => {
+        return hmtFilter.every(lang => school[lang] === 'Y');
+      });
+    }
+
     // Filter by location proximity
     const effectiveLocation = userLocation || (selectedTown && TOWN_COORDS[selectedTown]);
 
@@ -294,7 +302,7 @@ function App() {
     }
 
     setFilteredSchools(filtered);
-  }, [schools, myScore, maxCutoff, selectedTown, userLocation, maxDistance, useHistoricalMax, affiliatedSchool, genderFilter, sortBy]);
+  }, [schools, myScore, maxCutoff, selectedTown, userLocation, maxDistance, useHistoricalMax, affiliatedSchool, genderFilter, sortBy, hmtFilter]);
 
   const getScoreDisplay = (school) => {
     // Show COP for all eligible groups
@@ -366,6 +374,57 @@ function App() {
               <option value="girls">Girls</option>
             </select>
           </label>
+        </div>
+
+        <div className="filter-group">
+          <label>Higher Mother Tongue Languages:</label>
+          <div className="hmt-checkboxes">
+            <label className="checkbox-label">
+              <input
+                type="checkbox"
+                checked={hmtFilter.includes('HCL')}
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    setHmtFilter([...hmtFilter, 'HCL']);
+                  } else {
+                    setHmtFilter(hmtFilter.filter(l => l !== 'HCL'));
+                  }
+                }}
+              />
+              Higher Chinese
+            </label>
+            <label className="checkbox-label">
+              <input
+                type="checkbox"
+                checked={hmtFilter.includes('HTL')}
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    setHmtFilter([...hmtFilter, 'HTL']);
+                  } else {
+                    setHmtFilter(hmtFilter.filter(l => l !== 'HTL'));
+                  }
+                }}
+              />
+              Higher Tamil
+            </label>
+            <label className="checkbox-label">
+              <input
+                type="checkbox"
+                checked={hmtFilter.includes('HML')}
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    setHmtFilter([...hmtFilter, 'HML']);
+                  } else {
+                    setHmtFilter(hmtFilter.filter(l => l !== 'HML'));
+                  }
+                }}
+              />
+              Higher Malay
+            </label>
+          </div>
+          <p className="filter-hint">
+            Filter schools that offer these Higher Mother Tongue languages
+          </p>
         </div>
 
         <div className="filter-group">
@@ -497,6 +556,13 @@ function App() {
                       { latitude: parseFloat(school.Latitude), longitude: parseFloat(school.Longitude) }
                     ) / 1000).toFixed(1)
                   } km</p>
+                )}
+                {(school.HCL === 'Y' || school.HTL === 'Y' || school.HML === 'Y') && (
+                  <p><strong>Higher MT:</strong> {[
+                    school.HCL === 'Y' && 'Chinese',
+                    school.HTL === 'Y' && 'Tamil',
+                    school.HML === 'Y' && 'Malay'
+                  ].filter(Boolean).join(', ')}</p>
                 )}
               </div>
               <div className="cop-history">
