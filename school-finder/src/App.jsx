@@ -89,7 +89,7 @@ function App() {
   const [affiliatedSchool, setAffiliatedSchool] = useState(''); // School name the student is affiliated with
   const [genderFilter, setGenderFilter] = useState('all'); // 'all', 'mixed', 'boys', 'girls'
   const [sortBy, setSortBy] = useState('name'); // 'name' or 'distance'
-  const [hmtFilter, setHmtFilter] = useState([]); // ['HCL', 'HTL', 'HML']
+  const [mtFilter, setMtFilter] = useState([]); // ['ML', 'TL', 'HCL', 'HML', 'HTL']
 
   // Helper function to extract numeric score from score string
   const extractNumericScore = (score, stream) => {
@@ -253,10 +253,10 @@ function App() {
       });
     }
 
-    // Filter by Higher Mother Tongue languages
-    if (hmtFilter.length > 0) {
+    // Filter by Mother Tongue languages
+    if (mtFilter.length > 0) {
       filtered = filtered.filter(school => {
-        return hmtFilter.every(lang => school[lang] === 'Y');
+        return mtFilter.every(lang => school[lang] === 'Y');
       });
     }
 
@@ -302,7 +302,7 @@ function App() {
     }
 
     setFilteredSchools(filtered);
-  }, [schools, myScore, maxCutoff, selectedTown, userLocation, maxDistance, useHistoricalMax, affiliatedSchool, genderFilter, sortBy, hmtFilter]);
+  }, [schools, myScore, maxCutoff, selectedTown, userLocation, maxDistance, useHistoricalMax, affiliatedSchool, genderFilter, sortBy, mtFilter]);
 
   const getScoreDisplay = (school) => {
     // Show COP for all eligible groups
@@ -326,193 +326,222 @@ function App() {
   return (
     <div className="app">
       <header>
-        <h1>Singapore Secondary School Finder</h1>
-        <p>Filter schools by AL score and location</p>
+        <h1>S1 School Finder</h1>
+        <p>Find the perfect secondary school based on your PSLE score and location</p>
       </header>
 
       <div className="filters">
-        <div className="filter-group">
-          <label>
-            Your AL Score: {myScore}
-            <input
-              type="range"
-              min="4"
-              max="30"
-              value={myScore}
-              onChange={(e) => setMyScore(parseInt(e.target.value))}
-            />
-          </label>
-          <p className="filter-hint">
-            Eligible for: {eligibleGroups.map(g => GROUP_DISPLAY_NAMES[g]).join(', ')}
-          </p>
-        </div>
-
-        <div className="filter-group">
-          <label>
-            Maximum School Cut-off: {maxCutoff}
-            <input
-              type="range"
-              min="4"
-              max="30"
-              value={maxCutoff}
-              onChange={(e) => setMaxCutoff(parseInt(e.target.value))}
-            />
-          </label>
-          <p className="filter-hint">Filter out schools that are too easy (cut-off ≤ {maxCutoff})</p>
-        </div>
-
-        <div className="filter-group">
-          <label>
-            School Type:
-            <select
-              value={genderFilter}
-              onChange={(e) => setGenderFilter(e.target.value)}
-            >
-              <option value="all">All schools</option>
-              <option value="mixed">Co-ed (Mixed)</option>
-              <option value="boys">Boys</option>
-              <option value="girls">Girls</option>
-            </select>
-          </label>
-        </div>
-
-        <div className="filter-group">
-          <label>Higher Mother Tongue Languages:</label>
-          <div className="hmt-checkboxes">
-            <label className="checkbox-label">
+        {/* Row 1: Score filters */}
+        <div className="filter-row">
+          <div className="filter-group">
+            <label>
+              Your AL Score: {myScore}
               <input
-                type="checkbox"
-                checked={hmtFilter.includes('HCL')}
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    setHmtFilter([...hmtFilter, 'HCL']);
-                  } else {
-                    setHmtFilter(hmtFilter.filter(l => l !== 'HCL'));
-                  }
-                }}
+                type="range"
+                min="4"
+                max="30"
+                value={myScore}
+                onChange={(e) => setMyScore(parseInt(e.target.value))}
               />
-              Higher Chinese
             </label>
-            <label className="checkbox-label">
+            <p className="filter-hint">
+              Eligible: {eligibleGroups.map(g => GROUP_DISPLAY_NAMES[g]).join(', ')}
+            </p>
+          </div>
+
+          <div className="filter-group">
+            <label>
+              Max Cut-off: {maxCutoff}
               <input
-                type="checkbox"
-                checked={hmtFilter.includes('HTL')}
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    setHmtFilter([...hmtFilter, 'HTL']);
-                  } else {
-                    setHmtFilter(hmtFilter.filter(l => l !== 'HTL'));
-                  }
-                }}
+                type="range"
+                min="4"
+                max="30"
+                value={maxCutoff}
+                onChange={(e) => setMaxCutoff(parseInt(e.target.value))}
               />
-              Higher Tamil
             </label>
-            <label className="checkbox-label">
-              <input
-                type="checkbox"
-                checked={hmtFilter.includes('HML')}
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    setHmtFilter([...hmtFilter, 'HML']);
-                  } else {
-                    setHmtFilter(hmtFilter.filter(l => l !== 'HML'));
-                  }
-                }}
-              />
-              Higher Malay
+            <p className="filter-hint">Filter out easier schools</p>
+          </div>
+
+          <div className="filter-group">
+            <label>
+              School Type:
+              <select
+                value={genderFilter}
+                onChange={(e) => setGenderFilter(e.target.value)}
+              >
+                <option value="all">All schools</option>
+                <option value="mixed">Co-ed (Mixed)</option>
+                <option value="boys">Boys</option>
+                <option value="girls">Girls</option>
+              </select>
             </label>
           </div>
-          <p className="filter-hint">
-            Filter schools that offer these Higher Mother Tongue languages
-          </p>
         </div>
 
-        <div className="filter-group">
-          <label className="checkbox-label">
-            <input
-              type="checkbox"
-              checked={useHistoricalMax}
-              onChange={(e) => setUseHistoricalMax(e.target.checked)}
-            />
-            Use historical maximum cut-off
-          </label>
-          <p className="filter-hint">
-            Include schools if their cut-off was high enough in any of the past 3 years (2023-2025)
-          </p>
+        {/* Row 2: Mother Tongue + Historical */}
+        <div className="filter-row">
+          <div className="filter-group span-2">
+            <label>Mother Tongue:</label>
+            <div className="mt-filter-section">
+              <div className="mt-subsection">
+                <span className="mt-label">Standard:</span>
+                <div className="mt-checkboxes">
+                  <label className="checkbox-label">
+                    <input
+                      type="checkbox"
+                      checked={mtFilter.includes('ML')}
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          setMtFilter([...mtFilter, 'ML']);
+                        } else {
+                          setMtFilter(mtFilter.filter(l => l !== 'ML'));
+                        }
+                      }}
+                    />
+                    Malay
+                  </label>
+                  <label className="checkbox-label">
+                    <input
+                      type="checkbox"
+                      checked={mtFilter.includes('TL')}
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          setMtFilter([...mtFilter, 'TL']);
+                        } else {
+                          setMtFilter(mtFilter.filter(l => l !== 'TL'));
+                        }
+                      }}
+                    />
+                    Tamil
+                  </label>
+                </div>
+              </div>
+              <div className="mt-subsection">
+                <span className="mt-label">Higher:</span>
+                <div className="mt-checkboxes">
+                  <label className="checkbox-label">
+                    <input
+                      type="checkbox"
+                      checked={mtFilter.includes('HCL')}
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          setMtFilter([...mtFilter, 'HCL']);
+                        } else {
+                          setMtFilter(mtFilter.filter(l => l !== 'HCL'));
+                        }
+                      }}
+                    />
+                    Chinese
+                  </label>
+                  <label className="checkbox-label">
+                    <input
+                      type="checkbox"
+                      checked={mtFilter.includes('HML')}
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          setMtFilter([...mtFilter, 'HML']);
+                        } else {
+                          setMtFilter(mtFilter.filter(l => l !== 'HML'));
+                        }
+                      }}
+                    />
+                    Malay
+                  </label>
+                  <label className="checkbox-label">
+                    <input
+                      type="checkbox"
+                      checked={mtFilter.includes('HTL')}
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          setMtFilter([...mtFilter, 'HTL']);
+                        } else {
+                          setMtFilter(mtFilter.filter(l => l !== 'HTL'));
+                        }
+                      }}
+                    />
+                    Tamil
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="filter-group">
+            <label>Historical COP:</label>
+            <label className="checkbox-label">
+              <input
+                type="checkbox"
+                checked={useHistoricalMax}
+                onChange={(e) => setUseHistoricalMax(e.target.checked)}
+              />
+              Use historical maximum cut-off
+            </label>
+            <p className="filter-hint">Include if COP was high enough 2023-2025</p>
+          </div>
         </div>
 
-        <div className="filter-group">
-          <label>
-            Affiliated Secondary School:
+        {/* Row 3: Affiliation and Location */}
+        <div className="filter-row">
+          <div className="filter-group">
+            <label>Affiliated School:</label>
             <select
               value={affiliatedSchool}
               onChange={(e) => setAffiliatedSchool(e.target.value)}
             >
-              <option value="">None (not affiliated)</option>
+              <option value="">None</option>
               {getSchoolsWithAffiliation().map(name => (
                 <option key={name} value={name}>{name}</option>
               ))}
             </select>
-          </label>
-          <p className="filter-hint">
-            If you're from an affiliated primary school, select the secondary school to use easier cut-off points for that school only
-          </p>
-        </div>
-
-        <div className="filter-group">
-          <label>Your Location:</label>
-          <div className="location-options">
-            <div className="location-method">
-              <label>Town:
-                <select
-                  value={selectedTown}
-                  onChange={(e) => {
-                    setSelectedTown(e.target.value);
-                    setUserLocation(null);
-                    setPostalCode('');
-                  }}
-                >
-                  <option value="">Select a town</option>
-                  {Object.keys(TOWN_COORDS).sort().map(town => (
-                    <option key={town} value={town}>{town}</option>
-                  ))}
-                </select>
-              </label>
-            </div>
-
-            <div className="location-divider">OR</div>
-
-            <div className="location-method">
-              <label>Postal Code:
-                <div className="postal-input">
-                  <input
-                    type="text"
-                    value={postalCode}
-                    onChange={(e) => setPostalCode(e.target.value)}
-                    placeholder="Enter 6-digit postal code"
-                    maxLength="6"
-                  />
-                  <button onClick={geocodePostalCode} className="locate-btn">
-                    Locate
-                  </button>
-                </div>
-              </label>
-              {locationError && <p className="error-message">{locationError}</p>}
-            </div>
           </div>
 
-          {userLocation && (
-            <p className="location-status">
-              📍 Using coordinates: {userLocation.lat.toFixed(4)}, {userLocation.lng.toFixed(4)}
-            </p>
-          )}
+          <div className="filter-group">
+            <label>Town:</label>
+            <select
+              value={selectedTown}
+              onChange={(e) => {
+                setSelectedTown(e.target.value);
+                setUserLocation(null);
+                setPostalCode('');
+              }}
+            >
+              <option value="">Select a town</option>
+              {Object.keys(TOWN_COORDS).sort().map(town => (
+                <option key={town} value={town}>{town}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className="filter-group">
+            <label>Postal Code:</label>
+            <div className="postal-input">
+              <input
+                type="text"
+                value={postalCode}
+                onChange={(e) => setPostalCode(e.target.value)}
+                placeholder="6-digit code"
+                maxLength="6"
+              />
+              <button onClick={geocodePostalCode} className="locate-btn">
+                Locate
+              </button>
+            </div>
+            {locationError && <p className="error-message">{locationError}</p>}
+            {userLocation && (
+              <p className="location-status">
+                Using: {userLocation.lat.toFixed(4)}, {userLocation.lng.toFixed(4)}
+              </p>
+            )}
+          </div>
         </div>
 
+        {/* Row 4: Distance and Sort (conditional) */}
         {effectiveLocation && (
-          <>
+          <div className="filter-row two-cols">
             <div className="filter-group">
               <label>
-                Maximum Distance: {maxDistance} km
+                Max Distance: {maxDistance} km
                 <input
                   type="range"
                   min="1"
@@ -535,19 +564,26 @@ function App() {
                 </select>
               </label>
             </div>
-          </>
+          </div>
         )}
       </div>
 
       <div className="results">
-        <h2>Found {filteredSchools.length} schools</h2>
+        <div className="results-header">
+          <h2>Schools <span className="count">{filteredSchools.length}</span></h2>
+        </div>
 
         <div className="schools-grid">
-          {filteredSchools.map((school, index) => (
+          {filteredSchools.map((school, index) => {
+            const schoolName = school['School Name'];
+            const town = school.Town;
+            const showTown = !schoolName.toLowerCase().includes(town.toLowerCase());
+
+            return (
             <div key={index} className="school-card">
-              <h3>{school['School Name']}</h3>
+              <h3>{schoolName}</h3>
               <div className="school-info">
-                <p><strong>Town:</strong> {school.Town}</p>
+                {showTown && <p><strong>Town:</strong> {town}</p>}
                 <p><strong>Address:</strong> {school.Address}</p>
                 {effectiveLocation && school.Latitude && school.Longitude && (
                   <p><strong>Distance:</strong> {
@@ -557,16 +593,23 @@ function App() {
                     ) / 1000).toFixed(1)
                   } km</p>
                 )}
-                {(school.HCL === 'Y' || school.HTL === 'Y' || school.HML === 'Y') && (
+                {(school.ML === 'Y' || school.TL === 'Y') && (
+                  <p><strong>MT:</strong> {[
+                    'Chinese',
+                    school.ML === 'Y' && 'Malay',
+                    school.TL === 'Y' && 'Tamil'
+                  ].filter(Boolean).join(', ')}</p>
+                )}
+                {(school.HCL === 'Y' || school.HML === 'Y' || school.HTL === 'Y') && (
                   <p><strong>Higher MT:</strong> {[
                     school.HCL === 'Y' && 'Chinese',
-                    school.HTL === 'Y' && 'Tamil',
-                    school.HML === 'Y' && 'Malay'
+                    school.HML === 'Y' && 'Malay',
+                    school.HTL === 'Y' && 'Tamil'
                   ].filter(Boolean).join(', ')}</p>
                 )}
               </div>
               <div className="cop-history">
-                <h4>Cut-Off Points (COP){affiliatedSchool === school['School Name'] ? ' - Affiliated' : ''}</h4>
+                <h4>Cut-Off Points{affiliatedSchool === schoolName ? ' (Affiliated)' : ''}</h4>
                 <table className="cop-table">
                   <thead>
                     <tr>
@@ -581,7 +624,7 @@ function App() {
                       <tr key={year}>
                         <td>{year}</td>
                         {eligibleGroups.map(group => {
-                          const colName = getColumnName(year, group, school['School Name']);
+                          const colName = getColumnName(year, group, schoolName);
                           return <td key={group}>{school[colName] || '-'}</td>;
                         })}
                       </tr>
@@ -590,7 +633,7 @@ function App() {
                 </table>
               </div>
             </div>
-          ))}
+          )})}
         </div>
       </div>
 
@@ -651,9 +694,8 @@ function App() {
                     position={[schoolLat, schoolLng]}
                   >
                     <Tooltip
-                      permanent
-                      direction="right"
-                      offset={[10, 0]}
+                      direction="top"
+                      offset={[0, -10]}
                       className="school-tooltip"
                     >
                       {school['School Name']}
